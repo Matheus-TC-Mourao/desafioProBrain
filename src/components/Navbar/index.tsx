@@ -19,6 +19,7 @@ export default function Navbar({ home }: NavbarProps) {
         className={styles.select}
       >
         <option value="All">All</option>
+        <option value="0">0</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -38,12 +39,12 @@ export default function Navbar({ home }: NavbarProps) {
 
   return (
     <div className={styles.navbar}>
-      <Link to={"/"}>
-        <img src={Logo} alt="logo" onClick={() => clearSearch()} />
-      </Link>
-      <div className={styles.bar}>
-        {home ? (
-          <>
+      {home ? (
+        <>
+          <Link to={"/"}>
+            <img src={Logo} alt="logo" onClick={() => clearSearch()} />
+          </Link>
+          <div className={styles.bar}>
             <div className={styles.filter}>
               <span>Filter by level: </span>
               {renderFilter()}
@@ -53,15 +54,22 @@ export default function Navbar({ home }: NavbarProps) {
               placeholder="Search"
               onChange={(e) => setSearch(e.target.value)}
             />
-          </>
-        ) : (
+          </div>
+        </>
+      ) : (
+        <>
+          <div className={styles.bar}>
+            <Link to={"/"}>
+              <button onClick={() => clearSearch()} className={styles.button}>
+                Back home
+              </button>
+            </Link>
+          </div>
           <Link to={"/"}>
-            <button onClick={() => clearSearch()} className={styles.button}>
-              Back home
-            </button>
+            <img src={Logo} alt="logo" onClick={() => clearSearch()} />
           </Link>
-        )}
-      </div>
+        </>
+      )}
     </div>
   )
 }

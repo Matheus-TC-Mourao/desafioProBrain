@@ -26,8 +26,8 @@ interface SpellProviderProps {
 }
 export function SpellProvider({ children }: SpellProviderProps) {
   const [data, setData] = useState<Spell[]>(defualtValues.data)
-  const [filter, setFilter] = useState<string>("All")
-  const [search, setSearch] = useState<string>("")
+  const [filter, setFilter] = useState<string>(defualtValues.filter)
+  const [search, setSearch] = useState<string>(defualtValues.search)
 
   useEffect(() => {
     getSpells().then((data) => setData(data))

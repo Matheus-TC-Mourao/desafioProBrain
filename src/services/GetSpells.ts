@@ -4,6 +4,8 @@ export const getSpells = async () => {
     const res = await fetch(url)
     if (!res.ok) throw new Error(`Response status: ${res.status}`)
     const json = await res.json()
+  console.log(json)
+
     return json.results
   } catch (error) {
     console.log(error)

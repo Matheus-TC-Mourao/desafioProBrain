@@ -13,6 +13,8 @@ export default function Home() {
     switch (filter) {
       case "All":
         return true
+      case "0":
+        return spell.level === 0
       case "1":
         return spell.level === 1
       case "2":
