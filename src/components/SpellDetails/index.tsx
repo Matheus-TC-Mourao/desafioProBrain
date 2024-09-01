@@ -41,7 +41,7 @@ export default function SpellDetails({ url }: SpellDetailsProps) {
           <p>{spell.desc}</p>
         </div>
       </div>
-      {spell.higher_level === 0 && (
+      {spell.higher_level.length !== 0 && (
         <div className={styles.desc}>
           <span>High level: </span>
           <div>
@@ -77,16 +77,30 @@ export default function SpellDetails({ url }: SpellDetailsProps) {
         <span>Concentration:</span>
         <p>{spell.concentration ? "Yes" : "No"}</p>
       </div>
+      {spell.casting_time && (
+        <div className={styles.desc}>
+          <span>Casting time:</span>
+          <p>{spell.casting_time}</p>
+        </div>
+      )}
       {spell.attack_type && (
         <div className={styles.desc}>
           <span>Attack type:</span>
           <p>{spell.attack_type}</p>
         </div>
       )}
-      {spell.damage === 0 && (
+      {spell.damage &&
+        spell.damage.length !== 0 &&
+        spell.damage.damage_type && (
+          <div className={styles.desc}>
+            <span>Damage:</span>
+            <p>{spell.damage.damage_type.name}</p>
+          </div>
+        )}
+      {spell.area_of_effect && spell.area_of_effect.length !== 0 && (
         <div className={styles.desc}>
-          <span>Damage:</span>
-          <p>{spell.damage.damage_type.name}</p>
+          <span>Area of effect(type/size):</span>
+          <p>{spell.area_of_effect.type + " / " + spell.area_of_effect.size}</p>
         </div>
       )}
       {spell.dc?.dc_type.name && (
@@ -103,7 +117,7 @@ export default function SpellDetails({ url }: SpellDetailsProps) {
         <span>Classes:</span>
         <p>{handleObj(spell.classes)}</p>
       </div>
-      {spell.subclasses === 0 && (
+      {spell.subclasses.length !== 0 && (
         <div className={styles.desc}>
           <span>Subclasses:</span>
           <p>{handleObj(spell.subclasses)}</p>
